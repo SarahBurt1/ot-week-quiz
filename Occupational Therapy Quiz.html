@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Occupational Therapy Quiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; padding: 0; background-color: #f9f9f9; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { text-align: center; }
+        .question { margin-bottom: 20px; }
+        .question h3 { margin-bottom: 10px; }
+        button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        .results { margin-top: 20px; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Occupational Therapy Quiz</h1>
+        <p>To share the fun in OT Week we have created a quick quiz to test your Occupational Therapy knowledge.</p>
+        <form id="quizForm">
+            <div class="question">
+                <h3>1. What does OT stand for?</h3>
+                <label><input type="radio" name="q1" value="a"> Occupational Therapy</label><br>
+                <label><input type="radio" name="q1" value="b"> Operational Training</label><br>
+                <label><input type="radio" name="q1" value="c"> Office Technology</label>
+            </div>
+            <div class="question">
+                <h3>2. Which population does OT commonly serve?</h3>
+                <label><input type="radio" name="q2" value="a"> Only children</label><br>
+                <label><input type="radio" name="q2" value="b"> Only elderly</label><br>
+                <label><input type="radio" name="q2" value="c"> People of all ages</label>
+            </div>
+            <div class="question">
+                <h3>3. What is a common goal of OT?</h3>
+                <label><input type="radio" name="q3" value="a"> Improve computer skills</label><br>
+                <label><input type="radio" name="q3" value="b"> Enhance daily living activities</label><br>
+                <label><input type="radio" name="q3" value="c"> Teach math</label>
+            </div>
+            <div class="question">
+                <h3>4. Which setting might an OT work in?</h3>
+                <label><input type="radio" name="q4" value="a"> Hospital</label><br>
+                <label><input type="radio" name="q4" value="b"> School</label><br>
+                <label><input type="radio" name="q4" value="c"> All of the above</label>
+            </div>
+            <div class="question">
+                <h3>5. What tool might an OT use?</h3>
+                <label><input type="radio" name="q5" value="a"> Wheelchair</label><br>
+                <label><input type="radio" name="q5" value="b"> Paintbrush</label><br>
+                <label><input type="radio" name="q5" value="c"> Both</label>
+            </div>
+            <div class="question">
+                <h3>6. OT helps people with:</h3>
+                <label><input type="radio" name="q6" value="a"> Physical challenges</label><br>
+                <label><input type="radio" name="q6" value="b"> Mental health issues</label><br>
+                <label><input type="radio" name="q6" value="c"> Both</label>
+            </div>
+            <div class="question">
+                <h3>7. OT is different from:</h3>
+                <label><input type="radio" name="q7" value="a"> Physical Therapy</label><br>
+                <label><input type="radio" name="q7" value="b"> Speech Therapy</label><br>
+                <label><input type="radio" name="q7" value="c"> All of the above</label>
+            </div>
+            <div class="question">
+                <h3>8. OT can help with:</h3>
+                <label><input type="radio" name="q8" value="a"> Dressing</label><br>
+                <label><input type="radio" name="q8" value="b"> Cooking</label><br>
+                <label><input type="radio" name="q8" value="c"> All of the above</label>
+            </div>
+            <div class="question">
+                <h3>9. OT professionals are:</h3>
+                <label><input type="radio" name="q9" value="a"> Certified and licensed</label><br>
+                <label><input type="radio" name="q9" value="b"> Volunteers</label><br>
+                <label><input type="radio" name="q9" value="c"> Students</label>
+            </div>
+            <div class="question">
+                <h3>10. OT Week celebrates:</h3>
+                <label><input type="radio" name="q10" value="a"> Occupational Therapists</label><br>
+                <label><input type="radio" name="q10" value="b"> Engineers</label><br>
+                <label><input type="radio" name="q10" value="c"> Teachers</label>
+            </div>
+            <button type="button" onclick="submitQuiz()">Submit</button>
+        </form>
+        <div class="results" id="results"></div>
+        <p><strong>Thank you for joining in the fun for OT Week.</strong></p>
+    </div>
+    <script>
+        const answers = {
+            q1: "a",
+            q2: "c",
+            q3: "b",
+            q4: "c",
+            q5: "c",
+            q6: "c",
+            q7: "c",
+            q8: "c",
+            q9: "a",
+            q10: "a"
+        };
+
+        function submitQuiz() {
+            let score = 0;
+            let output = "<h2>Results:</h2>";
+            for (let i = 1; i <= 10; i++) {
+                const q = "q" + i;
+                const selected = document.querySelector('input[name="' + q + '"]:checked');
+                if (selected) {
+                    const isCorrect = selected.value === answers[q];
+                    if (isCorrect) score++;
+                    output += `<p>Question ${i}: <span class="${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? 'Correct' : 'Incorrect'} (Your answer: ${selected.value}, Correct answer: ${answers[q]})</span></p>`;
+                } else {
+                    output += `<p>Question ${i}: <span class="incorrect">No answer selected (Correct answer: ${answers[q]})</span></p>`;
+                }
+            }
+            output += `<h3>Your Score: ${score} / 10</h3>`;
+            document.getElementById("results").innerHTML = output;
+        }
+    </script>
+
+
+</body></html>
